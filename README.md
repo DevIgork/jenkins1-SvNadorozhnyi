@@ -26,5 +26,3 @@ pipeline {
     }
 }
 ```
-
-P.S. You have access to [Jenkins playground](https://killercoda.com/online-marathon/course/Jenkins/Jenkins_practical_task). Otherwise, make sure you have a functional Jenkins instance configured.
