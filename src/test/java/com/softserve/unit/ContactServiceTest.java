@@ -20,22 +20,21 @@ public class ContactServiceTest {
     @DisplayName("Reading all contacts from the database")
     @Test
     @Order(1)
-    public void checkContacts() {
+    public void checkContacts_OkCase() {
         log.info("\t\t@Test checkContacts()");
         //
         List<ContactDto> expected = Arrays.asList(
                 new ContactDto(1, "Ivan", "Ivanov", "ivan@gmail.com", "+380671234567"),
                 new ContactDto(2, "Petro", "Petrov", "petro@gmail.com", "+380631234567")
         );
-        List<ContactDto> actual = contactService.listContact();
         //
-        Assertions.assertEquals(expected, actual, "checkContacts() Error, actual.size() = " + actual.size());
+        Assertions.assertEquals(expected, contactService.listContact(), "checkContacts() Error, actual.size() = " + actual.size());
     }
 
     @DisplayName("Adding a new contact to the database")
     @Test
     @Order(2)
-    public void checkAddContacts() {
+    public void addContact_ValidData_OkCase() {
         log.info("\t\t@Test checkAddContacts()");
         //
         ContactDto nextContactDto = new ContactDto(3, "John", "Doe", "john@gmail.com", "+380931234567");
@@ -45,15 +44,14 @@ public class ContactServiceTest {
                 nextContactDto
         );
         contactService.addContact(nextContactDto);
-        List<ContactDto> actual = contactService.listContact();
         //
-        Assertions.assertEquals(expected, actual, "checkAddContacts() Error, actual.size() = " + actual.size());
+        Assertions.assertEquals(expected, contactService.listContact(), "checkAddContacts() Error, actual.size() = " + actual.size());
     }
 
     @DisplayName("Deleting an existing record from the database")
     @Test
     @Order(3)
-    public void checkRemoveContacts() {
+    public void removeContacts_ValidData_OkCase() {
         log.info("\t\t@Test checkAddContacts()");
         //
         ContactDto nextContactDto = new ContactDto(3, "John", "Doe", "john@gmail.com", "+380931234567");
@@ -62,20 +60,19 @@ public class ContactServiceTest {
                 new ContactDto(2, "Petro", "Petrov", "petro@gmail.com", "+380631234567")
         );
         contactService.removeContact(3);
-        List<ContactDto> actual = contactService.listContact();
         //
-        Assertions.assertEquals(expected, actual, "checkRemoveContacts() Error, actual.size() = " + actual.size());
+        Assertions.assertEquals(expected, contactService.listContact(), "checkRemoveContacts() Error, actual.size() = " + actual.size());
     }
 
     @DisplayName("Reading environment variables")
     @Test
     public void checkEnvironment() {
         // From Maven
-        log.info("\t\t@Test ***surefire.java.version = " + System.getProperty("surefire.application.password"));
+        log.info("\t\t@Test ***surefire.java.version = {}", System.getProperty("surefire.application.password"));
         // From OS
-        log.info("\t\t@Test ***System.getenv(\"JAVA_HOME\") = " + System.getenv("JAVA_HOME"));
-        log.info("\t\t@Test ***System.getenv(\"DEFAULT_PASS\") = " + System.getenv("DEFAULT_PASS"));
+        log.info("\t\t@Test ***System.getenv(\"JAVA_HOME\") = {}", System.getenv("JAVA_HOME"));
+        log.info("\t\t@Test ***System.getenv(\"DEFAULT_PASS\") =  {}" , System.getenv("DEFAULT_PASS"));
         // From Eclipse/Idea
-        log.info("\t\t@Test ***System.getenv().MY_IDE = " + System.getenv().get("MY_IDE"));
+        log.info("\t\t@Test ***System.getenv().MY_IDE = {}", System.getenv().get("MY_IDE"));
     }
 }
